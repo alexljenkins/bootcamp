@@ -27,7 +27,7 @@ def win():
         print ('You\'re no fun! bye bye')
 
 print ('Let\'s play a game....')        
-game()
+#game()
 
 
 
@@ -46,7 +46,20 @@ def game2(move):
     else:
         return (f'{move} is cheating \nYou must be playing a different game...')    
 
-#while move != 'stop':
-#    move = input('Pick scissors, paper or rock?:')
-#    winning_move = game2(move)
-#    print(winning_move)
+while move != 'stop':
+    move = input('Pick scissors, paper or rock?:')
+    winning_move = game2(move)
+    print(winning_move)
+        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

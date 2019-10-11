@@ -17,6 +17,8 @@ def FizzBuzz(x):
             print('Buzz')
         elif i % 3 == 0:
             print('Fizz')
+        else:
+            print(i)
 
 #FizzBuzz(int(input("Please enter a integer:")))
 
@@ -30,5 +32,24 @@ def FizzBuzz2(x):
             p += "Buzz"
         if p:
             print(p)
+        else:
+            print(i)
 
 FizzBuzz2(int(input("Please enter a integer:")))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

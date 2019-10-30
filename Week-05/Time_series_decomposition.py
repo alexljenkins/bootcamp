@@ -3,7 +3,6 @@ from matplotlib import pyplot as plt
 #101 numbers between 0 and 10 (inclusive) evenly spaced
 x = np.linspace(0,10,101)
 
-
 # RANDOM NOISE
 
 #uni distribution

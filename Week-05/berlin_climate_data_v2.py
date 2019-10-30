@@ -45,11 +45,15 @@ plt.show()
 
 data['temp'].groupby(data.index.year).count()
 
-
 # %%
-data['convolve'] = np.convolve(data['temp'], np.ones((12,))/12, mode='same')
 data['moving_average'] = data['temp'].rolling(12).mean()
 
-plt.plot(data['convolve'],linewidth=1)
-plt.plot(data['moving_average'],linewidth=1)
-plt.show()
+# %% # auto-regressor from stats model
+from statsmodels.tsa.ar_model import AR
+data['temp']
+
+ar = AR(data['temp'], dates=None, missing='drop')
+
+ar.fit()
+
+ar.predict(data['temp'], start='2013-01-01', end='2013-05-01')

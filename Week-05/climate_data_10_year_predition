@@ -64,19 +64,28 @@ def shift_a_year(df, answer):
         del data[f'{column}']
     data = data.iloc[12:]
     answer = answer.iloc[12:]
+
     return data, answer
 
+def remove_cols(df):
+    #shift data back 1 year
+    data = df.copy(deep = True)
+    data.drop(['raw_anomaly','adjusted_anomaly','regional_anomaly'], axis = 1, inplace = True)
+
+    return data
+
+
+# df = remove_cols(df)
 X, y = shift_a_year(df, y)
 
 # %% build model data
-X
 
 # split dataset into train and test
 split = 12
 X_train, X_test = X[1:len(X) - split], X[len(X) - split:]
 y_train, y_test = y[1:len(y) - split], y[len(y) - split:]
 
-m = LinearRegression()
+m = LinearRegression(normalize = True)
 
 m.fit(X_train, y_train)
 ypred = m.predict(X_test)
@@ -87,11 +96,26 @@ future_pred = m.predict(df[-13:])
 
 future_X = pd.date_range(start=df.iloc[-1].name, end=None, periods=13, freq='1MS')
 
-
-plt.plot(X_test.index, ypred, 'r-')
-plt.plot(X_test.index, y_test, 'g-')
-plt.plot(future_X, future_pred, 'b-')
+plt.plot(X.iloc[-48:].index, y.iloc[-48:], 'r-')
+plt.plot(X_test.index, ypred, 'b-')
+plt.plot(X_test.index, y_test, 'r-')
+plt.plot(future_X, future_pred, 'g-')
 plt.show()
+
+
+# %% Metircs
+print(f'Rsquared: {m.score(X_test,y_test)}')
+
+# Mean-Squared-Error (MSE) SUM(ytrue - ypred)^2 / n
+from sklearn.metrics import mean_squared_error
+mse = mean_squared_error(y_test, ypred)
+print(f'Mean Squared Error: {mse}')
+
+# mean_absolute_percentage_error
+mape = np.sum(np.abs(ypred-y_test) / y_test * 100) / len(ypred)
+print(f'Mean Absolute Percentage Error: {mape}')
+
+
 
 # %% Grid Search for optimal model and params
 

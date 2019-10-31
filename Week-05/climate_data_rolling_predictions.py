@@ -40,86 +40,103 @@ df = df.loc['1756-01-01':'2013-10-01']
 # forward fill data from previous year instead of previous datapoint.
 df = df.groupby(df.index.month).fillna(method='ffill', limit = 1)
 # df.loc['1866'] # the year with NAs
-y = df['adjusted_temp']
-df.drop('adjusted_temp', axis = 1, inplace = True)
-
+y = df['raw_temp']
+# df.drop('raw_temp', axis = 1, inplace = True)
 #%%
 
-def shift_10_years(df, answer):
+def shift_10_years_x(data, answer):
     #shift data back 10 times from 1 to 10 years
-    data = df.copy(deep = True)
     for i, column in zip(range(len(data.columns)), data.columns):
         for years in range(12, 132, 12):
             data[f'{column}_{years}'] = data.iloc[:,i].shift(years)
-    data = data.iloc[120:]
+    data = data.iloc[120:,1:]
     answer = answer.iloc[120:]
     return data, answer
 
 
-def shift_a_year(df, answer):
+def shift_10_years(df, answer):
     #shift data back 1 year
     data = df.copy(deep = True)
     for column in data.columns:
-        data[f'{column}_12'] = data[f'{column}'].shift(12)
+        data[f'{column}_120'] = data[f'{column}'].shift(120)
         del data[f'{column}']
-    data = data.iloc[12:]
-    answer = answer.iloc[12:]
+    data = data.iloc[120:]
+    answer = answer.iloc[120:]
+
     return data, answer
 
-X, y = shift_a_year(df, y)
+def remove_cols(df):
+    #shift data back 1 year
+    data = df.copy(deep = True)
+    data.drop(['raw_anomaly','adjusted_anomaly','regional_anomaly'], axis = 1, inplace = True)
+    data.drop(['regional_temp','adjusted_temp'], axis = 1, inplace = True)
 
+    return data
+
+
+df = remove_cols(df)
+# X, y = shift_10_years(df, y)
+X, y = shift_10_years_x(df, y)
 # %% build model data
-X
 
 # split dataset into train and test
 split = 12
-X_train, X_test = X[1:len(X) - split], X[len(X) - split:]
-y_train, y_test = y[1:len(y) - split], y[len(y) - split:]
+X_train, X_test = X[:-split], X[-split:]
+y_train, y_test = y[:-split], y[-split:]
 
 m = LinearRegression()
 
 m.fit(X_train, y_train)
 ypred = m.predict(X_test)
-
 m.score(X_test, y_test)
+X.head()
+future_pred = m.predict(df.iloc[-12:,:-1])
 
-future_pred = m.predict(df[-13:])
+future_X = pd.date_range(start=df.iloc[-1].name, end=None, periods=13, freq='1MS')[1:]
 
-future_X = pd.date_range(start=df.iloc[-1].name, end=None, periods=13, freq='1MS')
-
-
-plt.plot(X_test.index, ypred, 'r-')
-plt.plot(X_test.index, y_test, 'g-')
-plt.plot(future_X, future_pred, 'b-')
+plt.plot(X.iloc[-48:].index, y.iloc[-48:], 'r-')
+plt.plot(X_test.index, ypred, 'b-')
+# plt.plot(X_test.index, y_test, 'y-')
+plt.plot(future_X, future_pred, 'g-')
 plt.show()
 
-# %% Grid Search for optimal model and params
 
-names = ['LinearRegression',
-         'Ridge',
-         'Lasso',
-         'ElasticNet'
-         ]
+# %% Creating DF to House all the predictions
 
-classifiers = [LinearRegression(),
-               Ridge(),
-               Lasso(),
-               ElasticNet()
-               ]
-#print(LogisticRegression().get_params().keys())
+future = pd.date_range(start=df.iloc[-1].name, end=None, periods=121, freq='1MS')[1:]
+future_df = pd.DataFrame(index=future)
+future_df.index.name = 'date'
+X.head()
 
-parameters = [{'normalize':[True,False]},
-              {'alpha':[1e-15,1e-10,1e-8,1e-4,1e-2,1,5,10,20],'normalize':[True,False]}, #'alpha':[1e-15,1e-10,1e-8,1e-4,1e-2,1,5,10,20],'normalize':[True,False],'solver':['lsqr','sag','saga']
-              {'alpha':[1e-15,1e-10,1e-8,1e-4,1e-2,1,5,10,20],'normalize':[True,False]}, #'alpha':[1e-15,1e-10,1e-8,1e-4,1e-2,1,5,10,20],'normalize':[True,False]
-              {'alpha':[1e-15,1e-10,1e-8,1e-4,1e-2,1,5,10,20],'normalize':[True,False]} #'alpha':[1e-15,1e-10,1e-8,1e-4,1e-2,1,5,10,20],'l1_ratio':['0','0.1','0.2','0.5','0.8','0.9','1'],'normalize':[True,False]
-              ]
 
-answer = pd.DataFrame(columns=['Name','Score'])#,'TP','TN','FP','FN','AUC'])
+for i in range(12):
+    m = LinearRegression(normalize = True)
+    # m.fit(X, y) #no refit 
+    # ypred = m.predict(X_test)
+    future_pred = m.predict(df[-12:])
+    future_df[f'i'] = future_pred
 
-for name, classifier, parameter in zip(names, classifiers, parameters):
-    clf = GridSearchCV(classifier,parameter)
-    m = clf.fit(X_train, y_train)
-    score = clf.score(X_test, y_test)
-    answer = answer.append({'Name':name, 'Score':score}, ignore_index=True)
 
-print(answer.sort_values(by = 'Score', ascending = False))
+
+
+
+
+
+
+
+# %% Metircs
+print(f'Rsquared: {m.score(X_test,y_test)}')
+
+# Mean-Squared-Error (MSE) SUM(ytrue - ypred)^2 / n
+from sklearn.metrics import mean_squared_error
+mse = mean_squared_error(y_test, ypred)
+print(f'Mean Squared Error: {mse}')
+
+# mean_absolute_percentage_error
+mape = np.sum(np.abs(ypred-y_test) / y_test * 100) / len(ypred)
+print(f'Mean Absolute Percentage Error: {mape}')
+
+#mean absolute error
+from sklearn.metrics import mean_absolute_error
+mae = mean_absolute_error(y_test, ypred)
+print(f'Mean Absolute Error: {mae}')

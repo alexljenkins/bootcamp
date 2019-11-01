@@ -67,7 +67,7 @@ def shift_a_year(df, answer):
     return data, answer
 
 X, y = shift_a_year(df, y)
-
+# X, y = shift_10_years(df, y)
 # %% build model data
 X
 

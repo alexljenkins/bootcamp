@@ -66,6 +66,18 @@ def shift_10_years(df, answer):
 
     return data, answer
 
+def shift_1_year(df, answer):
+    #shift data back 1 year
+    data = df.copy(deep = True)
+    for column in data.columns:
+        data[f'{column}_12'] = data[f'{column}'].shift(12)
+        del data[f'{column}']
+    data = data.iloc[12:]
+    answer = answer.iloc[12:]
+
+    return data, answer
+
+
 def remove_cols(df):
     #shift data back 1 year
     data = df.copy(deep = True)
@@ -77,11 +89,12 @@ def remove_cols(df):
 
 df = remove_cols(df)
 # X, y = shift_10_years(df, y)
-X, y = shift_10_years_x(df, y)
+X, y = shift_1_year(df, y)
+# X, y = shift_10_years_x(df, y)
 # %% build model data
 
 # split dataset into train and test
-split = 12
+split = 6
 X_train, X_test = X[:-split], X[-split:]
 y_train, y_test = y[:-split], y[-split:]
 
@@ -91,9 +104,16 @@ m.fit(X_train, y_train)
 ypred = m.predict(X_test)
 m.score(X_test, y_test)
 X.head()
-future_pred = m.predict(df.iloc[-12:,:-1])
+# future_pred = m.predict(df.iloc[-12:,:-1]) #multi varaible
+future_pred = m.predict(df.iloc[-12:,:]) #single variable
 
 future_X = pd.date_range(start=df.iloc[-1].name, end=None, periods=13, freq='1MS')[1:]
+
+type(future_X)
+futureX = future_X.to_frame(name='date')
+futureX['temp']=pd.Series(future_pred)
+
+
 
 plt.plot(X.iloc[-48:].index, y.iloc[-48:], 'r-')
 plt.plot(X_test.index, ypred, 'b-')
@@ -103,19 +123,32 @@ plt.show()
 
 
 # %% Creating DF to House all the predictions
+frames = [df, pd.Series(future_pred)]
+result = pd.concat(frames)
+result.tail()  #concat into same column please you mother fucker!
 
-future = pd.date_range(start=df.iloc[-1].name, end=None, periods=121, freq='1MS')[1:]
-future_df = pd.DataFrame(index=future)
-future_df.index.name = 'date'
-X.head()
+frames
+type(future_pred)
+df
+# future = pd.date_range(start=df.iloc[-1].name, end=None, periods=13, freq='1MS')[1:]
+# future_df = pd.DataFrame(index=future)
+# future_df.index.name = 'date'
+# X.tail()
+
+future_df.head()
+
+df.tail()
 
 
-for i in range(12):
+# %%
+
+for i in range(10):
     m = LinearRegression(normalize = True)
     # m.fit(X, y) #no refit
     # ypred = m.predict(X_test)
     future_pred = m.predict(df[-12:])
     future_df[f'i'] = future_pred
+    print(future_pred)
 
 
 

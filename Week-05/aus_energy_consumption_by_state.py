@@ -2,7 +2,6 @@ import folium
 import pandas as pd
 from geopy.geocoders import Nominatim
 
-
 state_geo = r'Data/aus_states.json'
 energy_usage = r'Data/aus_summary_energy_usage.csv'
 states = pd.read_csv(energy_usage, index_col =0)[:-1]
@@ -17,9 +16,14 @@ for state in states.index:
     states.at[state,'long'] = g.longitude
 
 # %%
-states
 map = folium.Map(location=[-23.6993532, 133.8713752], zoom_start=5)
 folium.GeoJson(state_geo).add_to(map)
+
+for energy, lat, long in zip(states['Renewables'], states['lat'], states['long']):
+    folium.Marker((lat,long), popup=None, tooltip=(energy)).add_to(map)
+
+# %% save map
+map.save('aus_states.html')
 
 # choro = folium.Choropleth(
 #     geo_data=state_geo,
@@ -30,10 +34,4 @@ folium.GeoJson(state_geo).add_to(map)
 #     fill_color='YlGn',
 #     fill_opacity=0.7,
 #     line_opacity=0.2,
-#     legend_name='Renewable Energy')
-
-for energy, lat, long in zip(states['Renewables'], states['lat'], states['long']):
-    folium.Marker((lat,long), popup=None, tooltip=(energy)).add_to(map)
-
-# %% save map
-map.save('aus_states.html')
+#     legend_name='Renewable Energy').add_to(map)

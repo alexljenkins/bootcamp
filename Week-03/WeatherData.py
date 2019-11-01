@@ -21,27 +21,27 @@ data.set_index(keys = 'datetime', drop = False, inplace = True)
 data['timestamp'] = data['datetime'].apply(pd.Timestamp.timestamp) #to seconds timestamp
 
 for time in range(data.timestamp.min(), data.timestamp.max(),86400):
-    
+
     request = requests.get(path)
     jr = request.json()
     df = pd.DataFrame(jr['hourly']['data'])
     df.columns
     for result in df['time']:
-        
+
         data.loc[data['datetime'] == result].index #grabs the row with same timestamp
-    
+
     """
     make a request for the days weather
-    
+
     for each hour:
         etract temp, atemp, humidity, windspeed
         add them to the dataframe
     """
-    
+
 
 
 path = f'https://api.darksky.net/forecast/{SECRET_KEY}/{lat},{long},{time}'
-
+    
 result = requests.get(path)
 
 ##set timezone
@@ -94,4 +94,3 @@ pd.to_datetime(int(datetime.today().timestamp()),unit='s')
 data
 
 data['datetime'] == 1293858000
-

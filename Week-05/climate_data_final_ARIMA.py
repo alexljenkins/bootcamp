@@ -89,8 +89,10 @@ def remove_cols(df):
 
 df = remove_cols(df)
 # X, y = shift_10_years(df, y)
-X, y = shift_1_year(df, y)
-# X, y = shift_10_years_x(df, y)
+# X, y = shift_1_year(df, y)
+X, y = shift_10_years_x(df, y)
+
+X.head()
 # %% build model data
 
 # split dataset into train and test

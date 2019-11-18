@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div id="app">
+    <h1> [[ band.title ]] <h1>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Vue -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!-- Ajax -->
+<script src="https://cdn.jsdelivr.net/npm/vue-resources@1.5.1"></script>
+
+
+<script>
+  var app = new Vue({
+      el: '#app',
+      delimiters: ["[[", "]]"]
+      data: {
+          band: {}
+      },
+      methods: {
+          fetchData: function() {
+              this.$http.get('/test').then(response => {
+                  this.band = response.body;
+                  return response.body;
+              }, response => {
+                  // error callback
+                  console.log("A monkey broke something");
+              }
+              });
+          }
+      },
+      mounted: function() {
+          this.fetchData();
+      }
+  })
+</script>
+
+{% endblock %}

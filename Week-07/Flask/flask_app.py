@@ -1,8 +1,6 @@
 # https://www.youtube.com/watch?v=iwhuPxJ0dig
-
 from flask import Flask
 from flask import render_template, json
-
 
 app = Flask(__name__)
 
@@ -21,7 +19,9 @@ def projects():
 @app.route('/test')
 def test():
     my_dict = {"name":"Alex","title":"Data Scientist"}
-    return json.dumps(my_dict) #beautified and json recognised
+    updated = {"name":"Alex Jenkins","title":"King of the World!!!!!"}
+
+    return json.dumps(updated) #beautified and json recognised
     # return my_dict #just returns the dict format
 
 if __name__ == "__main__":

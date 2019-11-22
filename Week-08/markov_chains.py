@@ -85,18 +85,7 @@ def full_timeline_creator(df):
 data = full_timeline_creator(df)
 
 data.to_sql('data', conn, if_exists='append', index=False)
-data.head()
 #%%
-total = data.groupby(['location'])['customer_no'].count()
-probability_dist = data.groupby(['location', 'next'])['customer_no'].count()/total
-
-data.isna().sum()
-probability_dist['fruit'].sum()
-
-
-
-
-probability_dist = probability_dist.unstack()
 
 
 def find_probablity_dist(df):
@@ -109,8 +98,10 @@ def find_probablity_dist(df):
 
 prob_dist = find_probablity_dist(data)
 
-prob_dist.sum(axis=1)
+
 print(prob_dist)
+
+# prob_dist.to_csv("prob_dist.csv")
 #%%
 
 #Nb of customers at checkout over time
@@ -118,14 +109,12 @@ data.location.unique()
 locations = ['entrance','dairy','spices','drinks','fruit','checkout']
 
 
-a = pd.DataFrame(c.execute('''SELECT location, timestamp, customer_no FROM data WHERE location='checkout' GROUP BY customer_no;''').fetchall())
-a
+a = c.execute('''SELECT location, timestamp, customer_no FROM data WHERE location='checkout' GROUP BY customer_no;''').fetchall()
+
+pd.read_sql_query(a,conn)
+
+c.execute("SELECT * FROM data LIMIT 5;")
 time = a.iloc[:,1].apply(pd.to_datetime)
-
-
-
-# df.nth(0).groupby('location').count()
-# df.nth(0).groupby(df['location']).count()
 
 # Save (commit) the changes
 # conn.commit()

@@ -1,8 +1,9 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<div id="app">
+<div id="#unqiue">
     <h1> [[ band.title ]] <h1>
+    <a @click="handleSubmit" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger">Tell Me More</a>
 </div>
 {% endblock %}
 
@@ -15,27 +16,35 @@
 
 <script>
   var app = new Vue({
-      el: '#app',
+      el: '#unique',
       delimiters: ["[[", "]]"]
       data: {
           band: {}
       },
-      methods: {
-          fetchData: function() {
-              this.$http.get('/test').then(response => {
-                  this.band = response.body;
-                  return response.body;
-              }, response => {
-                  // error callback
-                  console.log("A monkey broke something");
-              }
-              });
-          }
-      },
+      // methods: {
+      //     fetchData: function() {
+      //         this.$http.get('/test').then(response => {
+      //             this.band = response.body;
+      //             return response.body;
+      //         }, response => {
+      //             // error callback
+      //             console.log("A monkey broke something");
+      //         })
+      //     }
+      // },
       mounted: function() {
-          this.fetchData();
+          this.fetchData()
+          console.log("mounted");
+      }, // close mounted
+      methods: {
+          handleSubmit: function(e) {
+              e.preventDefault()
+              console.log("Clicked")
+
+          }
+
       }
-  })
+  }) // close vue
 </script>
 
 {% endblock %}

@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div id="#unqiue">
+    <h1> [[ band.title ]] <h1>
+    <a @click="handleSubmit" class="btn btn-primary btn-xl text-uppercase js-scroll-trigger">Tell Me More</a>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Vue -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!-- Ajax -->
+<script src="https://cdn.jsdelivr.net/npm/vue-resources@1.5.1"></script>
+
+
+<script>
+  var app = new Vue({
+      el: '#unique',
+      delimiters: ["[[", "]]"]
+      data: {
+          band: {}
+      },
+      // methods: {
+      //     fetchData: function() {
+      //         this.$http.get('/test').then(response => {
+      //             this.band = response.body;
+      //             return response.body;
+      //         }, response => {
+      //             // error callback
+      //             console.log("A monkey broke something");
+      //         })
+      //     }
+      // },
+      mounted: function() {
+          this.fetchData()
+          console.log("mounted");
+      }, // close mounted
+      methods: {
+          handleSubmit: function(e) {
+              e.preventDefault()
+              console.log("Clicked")
+
+          }
+
+      }
+  }) // close vue
+</script>
+
+{% endblock %}

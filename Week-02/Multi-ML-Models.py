@@ -65,9 +65,9 @@ answer = pd.DataFrame(columns=['Name','Score'])#,'TP','TN','FP','FN','AUC'])
 
 for name, classifier, parameter in zip(names, classifiers, parameters):
     clf = GridSearchCV(classifier,parameter)
-    
+
     m = clf.fit(X_train, y_train)
     score = clf.score(X_test, y_test)
     answer = answer.append({'Name':name, 'Score':score}, ignore_index=True)
-    
+
 print(answer.sort_values(by = 'Score', ascending = False))

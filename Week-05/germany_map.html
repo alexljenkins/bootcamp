@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.5.1/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.5.1/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css"/>
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_2ccece953b2a45248bff03dad6d4e3c3 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_2ccece953b2a45248bff03dad6d4e3c3" ></div>
+        
+</body>
+<script>    
+    
+            var map_2ccece953b2a45248bff03dad6d4e3c3 = L.map(
+                "map_2ccece953b2a45248bff03dad6d4e3c3",
+                {
+                    center: [50.6118537, 9.1909725],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 6,
+                    zoomControl: true,
+                    preferCanvas: false,
+                    titles: "cartodbpositron",
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_f9377df90fb4446ebfe9b9790a070c03 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_2ccece953b2a45248bff03dad6d4e3c3);
+        
+    
+            var marker_b4d69a6d67954e828617ee70289a260b = L.marker(
+                [48.6296972, 9.1949534],
+                {}
+            ).addTo(map_2ccece953b2a45248bff03dad6d4e3c3);
+        
+    
+            var div_icon_5ba03dae551149278e6a975d64c4cae4 = L.divIcon({"className": "empty", "html": "0.23"});
+            marker_b4d69a6d67954e828617ee70289a260b.setIcon(div_icon_5ba03dae551149278e6a975d64c4cae4);
+        
+    
+            marker_b4d69a6d67954e828617ee70289a260b.bindTooltip(
+                `<div>
+                     ('Baden-Württemberg', 0.23)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_886af3a64f1745869a20af6f88d781a1 = L.marker(
+                [48.9467562, 11.4038717],
+                {}
+            ).addTo(map_2ccece953b2a45248bff03dad6d4e3c3);
+        
+    
+            var div_icon_8a4d1d722070415ab237c98dda38840a = L.divIcon({"className": "empty", "html": "0.12"});
+            marker_886af3a64f1745869a20af6f88d781a1.setIcon(div_icon_8a4d1d722070415ab237c98dda38840a);
+        
+    
+            marker_886af3a64f1745869a20af6f88d781a1.bindTooltip(
+                `<div>
+                     ('Bavaria', 0.12)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_c4a9e4cda498434ebd7876f6a5fe0317 = L.marker(
+                [52.5170365, 13.3888599],
+                {}
+            ).addTo(map_2ccece953b2a45248bff03dad6d4e3c3);
+        
+    
+            var div_icon_0f3ecec45175425ead32cc6819d5cfd6 = L.divIcon({"className": "empty", "html": "0.14"});
+            marker_c4a9e4cda498434ebd7876f6a5fe0317.setIcon(div_icon_0f3ecec45175425ead32cc6819d5cfd6);
+        
+    
+            marker_c4a9e4cda498434ebd7876f6a5fe0317.bindTooltip(
+                `<div>
+                     ('Berlin', 0.14)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_505e50b60685442d8489f0c2d6b1007d = L.marker(
+                [52.8455492, 13.2461296],
+                {}
+            ).addTo(map_2ccece953b2a45248bff03dad6d4e3c3);
+        
+    
+            var div_icon_e2bc1b057e6c4da0918f798fb066a37e = L.divIcon({"className": "empty", "html": "0.11"});
+            marker_505e50b60685442d8489f0c2d6b1007d.setIcon(div_icon_e2bc1b057e6c4da0918f798fb066a37e);
+        
+    
+            marker_505e50b60685442d8489f0c2d6b1007d.bindTooltip(
+                `<div>
+                     ('Brandenburg', 0.11)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_58a34794ac9c46b8a03e722c933a64d7 = L.marker(
+                [53.0758196, 8.8071646],
+                {}
+            ).addTo(map_2ccece953b2a45248bff03dad6d4e3c3);
+        
+    
+            var div_icon_d00c1021ef7249c7ab66cc965af37209 = L.divIcon({"className": "empty", "html": "0.09"});
+            marker_58a34794ac9c46b8a03e722c933a64d7.setIcon(div_icon_d00c1021ef7249c7ab66cc965af37209);
+        
+    
+            marker_58a34794ac9c46b8a03e722c933a64d7.bindTooltip(
+                `<div>
+                     ('Bremen', 0.09)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_c50cfda0fccc4efb8301be2c824c9926 = L.marker(
+                [53.550341, 10.000654],
+                {}
+            ).addTo(map_2ccece953b2a45248bff03dad6d4e3c3);
+        
+    
+            var div_icon_40c93834dbb342c08a88a7aea746d10e = L.divIcon({"className": "empty", "html": "0.09"});
+            marker_c50cfda0fccc4efb8301be2c824c9926.setIcon(div_icon_40c93834dbb342c08a88a7aea746d10e);
+        
+    
+            marker_c50cfda0fccc4efb8301be2c824c9926.bindTooltip(
+                `<div>
+                     ('Hamburg', 0.09)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_c89aa073007d4f33a111b8815a694b6a = L.marker(
+                [50.6118537, 9.1909725],
+                {}
+            ).addTo(map_2ccece953b2a45248bff03dad6d4e3c3);
+        
+    
+            var div_icon_417b1a912ec747458f7025f7be35684b = L.divIcon({"className": "empty", "html": "0.12"});
+            marker_c89aa073007d4f33a111b8815a694b6a.setIcon(div_icon_417b1a912ec747458f7025f7be35684b);
+        
+    
+            marker_c89aa073007d4f33a111b8815a694b6a.bindTooltip(
+                `<div>
+                     ('Hesse', 0.12)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_d472be204e82485cb1809e04d69cfdac = L.marker(
+                [52.8398531, 9.075962],
+                {}
+            ).addTo(map_2ccece953b2a45248bff03dad6d4e3c3);
+        
+    
+            var div_icon_2550b08aef2744ba91a9f65c4a4cd950 = L.divIcon({"className": "empty", "html": "0.08"});
+            marker_d472be204e82485cb1809e04d69cfdac.setIcon(div_icon_2550b08aef2744ba91a9f65c4a4cd950);
+        
+    
+            marker_d472be204e82485cb1809e04d69cfdac.bindTooltip(
+                `<div>
+                     ('Lower Saxony', 0.08)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_14b70457a4e744d185cc26785c333b95 = L.marker(
+                [53.7735234, 12.5755746],
+                {}
+            ).addTo(map_2ccece953b2a45248bff03dad6d4e3c3);
+        
+    
+            var div_icon_f1b8ec62609445e78d73fb435be81c54 = L.divIcon({"className": "empty", "html": "0.01"});
+            marker_14b70457a4e744d185cc26785c333b95.setIcon(div_icon_f1b8ec62609445e78d73fb435be81c54);
+        
+    
+            marker_14b70457a4e744d185cc26785c333b95.bindTooltip(
+                `<div>
+                     ('Mecklenburg-Vorpommern', 0.01)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_ca8196738a50474482566a069661c3cd = L.marker(
+                [51.4785568, 7.5533645],
+                {}
+            ).addTo(map_2ccece953b2a45248bff03dad6d4e3c3);
+        
+    
+            var div_icon_985e25996f0149c79d52f9e044cf9e30 = L.divIcon({"className": "empty", "html": "0.1"});
+            marker_ca8196738a50474482566a069661c3cd.setIcon(div_icon_985e25996f0149c79d52f9e044cf9e30);
+        
+    
+            marker_ca8196738a50474482566a069661c3cd.bindTooltip(
+                `<div>
+                     ('North Rhine-Westphalia', 0.1)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_a14ad744c8b442eda2af1abf45a98080 = L.marker(
+                [49.7497346, 7.4396553],
+                {}
+            ).addTo(map_2ccece953b2a45248bff03dad6d4e3c3);
+        
+    
+            var div_icon_be0a323c1a514a7a9d54efb7f9153757 = L.divIcon({"className": "empty", "html": "0.08"});
+            marker_a14ad744c8b442eda2af1abf45a98080.setIcon(div_icon_be0a323c1a514a7a9d54efb7f9153757);
+        
+    
+            marker_a14ad744c8b442eda2af1abf45a98080.bindTooltip(
+                `<div>
+                     ('Rhineland-Palatinate', 0.08)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_754af34364374b5db1a63a2f45cddbe5 = L.marker(
+                [49.4173988, 6.9805789],
+                {}
+            ).addTo(map_2ccece953b2a45248bff03dad6d4e3c3);
+        
+    
+            var div_icon_8d2373d803e9474db1d853502bb1ed96 = L.divIcon({"className": "empty", "html": "0.14"});
+            marker_754af34364374b5db1a63a2f45cddbe5.setIcon(div_icon_8d2373d803e9474db1d853502bb1ed96);
+        
+    
+            marker_754af34364374b5db1a63a2f45cddbe5.bindTooltip(
+                `<div>
+                     ('Saarland', 0.14)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_77242164a2b54d6aac65fbfa236de19b = L.marker(
+                [50.9295798, 13.4585052],
+                {}
+            ).addTo(map_2ccece953b2a45248bff03dad6d4e3c3);
+        
+    
+            var div_icon_b70ddd2e64be45c2a34c785fd513a86b = L.divIcon({"className": "empty", "html": "0.07"});
+            marker_77242164a2b54d6aac65fbfa236de19b.setIcon(div_icon_b70ddd2e64be45c2a34c785fd513a86b);
+        
+    
+            marker_77242164a2b54d6aac65fbfa236de19b.bindTooltip(
+                `<div>
+                     ('Saxony', 0.07)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_5d0e06f219b3443098d31d3b9fa1d865 = L.marker(
+                [51.908526, 11.4939134],
+                {}
+            ).addTo(map_2ccece953b2a45248bff03dad6d4e3c3);
+        
+    
+            var div_icon_01317828e1f041c4ae12f1a4ba4fe35f = L.divIcon({"className": "empty", "html": "0.08"});
+            marker_5d0e06f219b3443098d31d3b9fa1d865.setIcon(div_icon_01317828e1f041c4ae12f1a4ba4fe35f);
+        
+    
+            marker_5d0e06f219b3443098d31d3b9fa1d865.bindTooltip(
+                `<div>
+                     ('Saxony-Anhalt', 0.08)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_7a584ddeae6044c6935b0fb8cba4a165 = L.marker(
+                [54.1853998, 9.8220089],
+                {}
+            ).addTo(map_2ccece953b2a45248bff03dad6d4e3c3);
+        
+    
+            var div_icon_c029d918463f4e0ba0f1d68fbf51b8f4 = L.divIcon({"className": "empty", "html": "-0.01"});
+            marker_7a584ddeae6044c6935b0fb8cba4a165.setIcon(div_icon_c029d918463f4e0ba0f1d68fbf51b8f4);
+        
+    
+            marker_7a584ddeae6044c6935b0fb8cba4a165.bindTooltip(
+                `<div>
+                     ('Schleswig-Holstein', -0.01)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_fc45c71df18d4295a85929c1547bbd50 = L.marker(
+                [50.7333163, 11.0747905],
+                {}
+            ).addTo(map_2ccece953b2a45248bff03dad6d4e3c3);
+        
+    
+            var div_icon_158d0ed8ed704826ab34cbc75e7b1b48 = L.divIcon({"className": "empty", "html": "0.02"});
+            marker_fc45c71df18d4295a85929c1547bbd50.setIcon(div_icon_158d0ed8ed704826ab34cbc75e7b1b48);
+        
+    
+            marker_fc45c71df18d4295a85929c1547bbd50.bindTooltip(
+                `<div>
+                     ('Thuringia', 0.02)
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>

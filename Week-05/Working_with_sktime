@@ -1,0 +1,49 @@
+#101 numbers between 0 and 10 (inclusive) evenly spaced
+import sktime
+import numpy as np
+import pandas as pd
+from matplotlib import pyplot as plt
+from sktime.forecasters import DummyForecaster
+
+x = np.linspace(0,10,101)
+#normal distribution noise
+y1 = np.random.normal(size=101)
+y2 = np.random.normal(loc=0.5*x+y1, size=101)
+
+x = pd.DataFrame(np.linspace(0,10,202))
+
+y3 = pd.DataFrame(np.hstack([y1,y2]))
+
+plt.plot(x,y3)
+
+train = pd.Series([y3[0]])
+m = DummyForecaster(strategy='mean')
+m.fit(train)
+
+m.predict()
+
+# Random Forest to find inflection point/hinge
+
+y3.diff().plot()
+ydiff = y3.diff().dropna()
+
+X = x[:-1]
+
+
+from sklearn.ensemble import RandomForestRegressor
+# m = RandomForestRegressor(max_depth=1, n_estimators=1)
+from sklearn.tree import DecisionTreeRegressor
+m = DecisionTreeRegressor(max_depth=1)
+m.fit(X, ydiff[0])
+ypred = m.predict(X)
+
+
+Xfc = np.linspace(0,300,300).reshape(300,1)
+yfc = m.predict(Xfc)
+
+
+# forcast = np.cumsum(yfc) + y3[0]
+plt.plot(range(201),ydiff[0])
+plt.plot(range(201),ypred)
+plt.plot(range(300),yfc)
+plt.show()

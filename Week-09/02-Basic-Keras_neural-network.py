@@ -15,7 +15,7 @@ model = Sequential([
 
 model.compile(optimizer='rmsprop', loss='mse')
 
-model.fit(X, y, epochs=5000, batch_size=4)
+model.fit(X, y, epochs=500, batch_size=4)
 
 score = model.evaluate(X, y, batch_size=4)
 print(score)

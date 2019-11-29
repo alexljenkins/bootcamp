@@ -21,7 +21,7 @@ def df_normalizer(df):
     """
     Scale down to values between 0 and 1
     """
-    df = tf.keras.utils.normalize(x_train, axis=1)
+    df = tf.keras.utils.normalize(df, axis=1)
 
     return df
 
@@ -32,7 +32,7 @@ def model_initializer():
     """
     model = tf.keras.models.Sequential()
     model.add(tf.keras.layers.Flatten())
-    model.add(tf.keras.layers.Dense(128, activation=tf.nn.elu))
+    # model.add(tf.keras.layers.Dense(128, activation=tf.nn.elu))
     model.add(tf.keras.layers.Dense(64, activation=tf.nn.elu))
     model.add(tf.keras.layers.Dense(32, activation=tf.nn.elu))
     model.add(tf.keras.layers.Dense(10, activation=tf.nn.softmax))
@@ -45,9 +45,7 @@ def model_initializer():
     return model
 
 
-def metrics(model, x_train, y_train, x_test, y_test):
-    # score = model.evaluate(x_train, y_train, batch_size=1000)
-    # print(score)
+def metrics(model, x_test, y_test):
 
     val_loss, val_acc = model.evaluate(x_test, y_test)
     print(val_loss, val_acc)
@@ -67,7 +65,7 @@ if __name__ == '__main__':
 
     model = model_initializer()
 
-    model.fit(x_train, y_train, epochs=50) #, batch_size=1000
+    model.fit(x_train, y_train, epochs=15) #, batch_size=1000
     predictions = model.predict([x_test])
 
-    metrics(model, x_train, y_train, x_test, y_test)
+    metrics(model, x_test, y_test)

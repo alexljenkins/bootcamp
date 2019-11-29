@@ -105,7 +105,7 @@ if __name__ == '__main__':
     model = model_initializer()
 
     # fit
-    model.fit(x_train, y_train, epochs=1,validation_data=(x_test,y_test)) #, batch_size=1000,
+    model.fit(x_train, y_train, epochs=10,validation_data=(x_test,y_test),batch_size=1000) #, batch_size=1000,
     predictions = model.predict([x_test])
 
     # results

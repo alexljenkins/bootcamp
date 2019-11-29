@@ -89,8 +89,8 @@ def metrics(model, x_train, y_train, x_test, y_test):
     score = model.evaluate(x_train, y_train, batch_size=1000)
     print(score)
 
-    val_loss, val_acc = model.evaluate(x_test, y_test)
-    print(val_loss, val_acc)
+    test_loss, test_acc = model.evaluate(x_test, y_test)
+    print(test_loss, test_acc)
 
     # pick a random item from the test dataset
     # and display it with the model's predictions
@@ -120,6 +120,7 @@ if __name__ == '__main__':
     y_train = one_hot_encoder_v2(y_train)
     y_test = one_hot_encoder_v2(y_test)
 
+    # load the trained model if exists else initialize a new one
     try:
         model = tf.keras.models.load_model('data/saved_model.h5')
 

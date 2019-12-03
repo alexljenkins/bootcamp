@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<ul>
+    {% for m in movies %}
+    <li> {{ m }} </li>
+    {% endfor %}
+{% endblock %}

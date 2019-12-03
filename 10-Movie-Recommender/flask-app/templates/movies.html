@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="/results">
+    <input type="text" name="movie1" placeholder="Enter a Movie">
+    <input type="text" name="rating1"placeholder="Rating 0-5"><br>
+    <input type="text" name="movie2">
+    <input type="text" name="rating2"><br>
+    <input type="text" name="movie3">
+    <input type="text" name="rating3"><br>
+    <input type="submit"><br>
+</form>
+
+<h1><a href='/results'>Show me my movie results!</a></h1>
+{% endblock %}
